@@ -1,0 +1,355 @@
+/* ===== VARIABLES & RESET ===== */
+:root {
+  --primary-color: rgb(179, 90, 74);
+  --secondary-color: rgb(99, 66, 43);
+  --accent-color: #4A7C7A;
+  --neutral: #FCFAF8;
+  --text-light: #fff;
+  --text-dark: #333;
+  --dark-bg: #0B0B0B;
+  --light-bg: #f8f8f8;
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Montserrat', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text-dark);
+  background: #fff;
+}
+
+/* Elegant headings */
+h1 {
+  color: var(--text-light);
+}
+
+h2, h3, h4 {
+  font-family: 'Arial', sans-serif;
+  color: var(--secondary-color);
+}
+
+/* ===== HEADER (Transparent) ===== */
+header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+/* background that darkens on scroll */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 8%;
+  background: rgba(224, 173, 173, 0.95); 
+  transition: background 0.3s ease;
+}
+
+.navbar.scrolled {
+  background: rgba(0,0,0,0.9);
+}
+
+.logo {
+  font-size: 1.7rem;
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+/* compact topbar above main navbar */
+.topbar {
+  background: #070707;
+  color: var(--text-light);
+  font-size: 0.9rem;
+  padding: 6px 8%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.topbar a { color: var(--text-light); text-decoration: none; opacity: 0.9; }
+
+.main-nav ul { display: flex; gap: 28px; align-items: center; }
+
+.main-nav ul li a {
+  color: var(--text-light);
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  padding: 6px 8px;
+  transition: opacity 0.2s, border-bottom 0.2s;
+}
+
+.main-nav ul li a:hover { opacity: 0.85; border-bottom: 2px solid var(--primary-color); }
+
+.navbar { gap: 20px; }
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+nav ul li {
+  position: relative;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: var(--text-light);
+  font-weight: 400;
+  transition: 0.3s;
+}
+
+nav ul li a:hover {
+  opacity: 0.7;
+}
+
+.btn-primary {
+  padding: 12px 28px;
+  border-radius: 30px;
+  border: 2px solid var(--primary-color);
+  color: var(--text-light);
+  text-decoration: none;
+  background: var(--primary-color);
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: transparent;
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+/* ===== MEGA MENU ===== */
+.mega-menu {
+  position: absolute;
+  top: 40px;
+  left: -120px;
+  width: 500px;
+  background: white;
+  padding: 30px;
+  display: flex;
+  gap: 60px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s ease;
+}
+
+.mega-menu h4 {
+  margin-bottom: 10px;
+}
+
+.mega-menu a {
+  display: block;
+  margin-bottom: 8px;
+  color: #333;
+  text-decoration: none;
+}
+
+.dropdown:hover .mega-menu {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ===== HERO ===== */
+.hero, #hero {
+  height: 100vh;
+  background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url("../images/hero-image") center/cover no-repeat !important;
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 0 !important;
+}
+
+.hero-content {
+  position: relative;
+  color: white;
+  text-align: center;
+  animation: fadeUp 1.5s ease;
+}
+
+.hero-content h1 {
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+
+.hero-content p {
+  font-size: 1.3rem;
+  margin-bottom: 30px;
+}
+
+.hero-content .btn-primary {
+  font-size: 1rem;
+  font-weight: bold;
+}
+/* ===== SECTIONS ===== */
+section:not(.hero) {
+  padding: 100px 10%;
+  text-align: center;
+  animation: fadeUp 1.2s ease;
+}
+
+.rooms {
+  background: var(--light-bg);
+}
+
+.rooms h2,
+.gallery h2 {
+  margin-bottom: 40px;
+  font-size: 2.5rem;
+  color: var(--primary-color);
+}
+
+.about {
+  background: #f8f8f8;
+}
+
+.about h2 {
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+/* ===== FULL WIDTH IMAGE ===== */
+.full-image {
+  height: 80vh;
+  background: url("images/luxury.jpg") center/cover no-repeat;
+  position: relative;
+}
+
+.full-image::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+}
+
+.overlay-text {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+}
+
+/* ===== ROOMS ===== */
+.room-grid {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.room-card {
+  width: 300px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  transition: 0.4s;
+  background: var(--neutral);
+}
+
+.room-card:hover {
+  transform: translateY(-10px);
+}
+
+.room-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.room-card h3 {
+  margin: 15px 0 10px;
+}
+
+.room-card p {
+  padding: 0 15px 20px;
+  color: #555;
+}
+.price {
+  display: block;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+.price2 {
+  display: block;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-bottom: 30px;
+  padding-top: 0px;
+
+}
+
+/* ===== GALLERY ===== */
+.gallery {
+  background: var(--light-bg);
+}
+
+.slider {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 20px;
+}
+
+.slider img {
+  width: 400px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  scroll-snap-align: start;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  background: var(--secondary-color);
+  color: var(--text-light);
+  padding: 60px 10%;
+  text-align: center;
+}
+
+footer p {
+  margin: 5px 0;
+}
+
+/* ===== ANIMATION ===== */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .hero-content h1 {
+    font-size: 2.2rem;
+  }
+
+  .room-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+}
