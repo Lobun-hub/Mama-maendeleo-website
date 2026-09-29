@@ -118,7 +118,7 @@
       <li><a href="#services">Services</a></li>
       <li><a href="#rates">Rates</a></li>
       <li><a href="#location">Location</a></li>
-      <li><a href="#booking" id="bookingForm" class="nav-cta">Book Now</a></li>
+      <li><a href="#booking" class="nav-cta">Book Now</a></li>
     </ul>
   </nav>
 
@@ -130,7 +130,7 @@
       <h1>Where Every<br><em>Details</em>Delivers<br>Comfort</h1>
       <p class="hero-sub">A sanctuary of comfort and authentic Swahili hospitality, nestled in the heart of Hindi — your gateway to Lamu's UNESCO World Heritage wonders.</p>
       <div class="hero-actions">
-        <a href="#contact" class="btn-primary">Reserve a Room</a>
+        <a href="#booking" class="btn-primary">Reserve a Room</a>
         <a href="#about" class="btn-ghost">Explore the Resort</a>
       </div>
     </div>
@@ -162,7 +162,7 @@
 
   <!-- ── ABOUT ── -->
   <section class="about" id="about">
-    <div class="about-image" style="background-image: url('../images/33.png');" role="img" aria-label="Mama Maendeleo Resort exterior view showcasing authentic Swahili architecture">
+    <div class="about-image" role="img" aria-label="Mama Maendeleo Resort exterior view showcasing authentic Swahili architecture">
       <div class="about-image-badge">"A home away from home on the Swahili Coast"</div>
     </div>
     <div class="about-content">
@@ -486,7 +486,7 @@
         <li><a href="#services">Our Services</a></li>
         <li><a href="#rates">Room Rates</a></li>
         <li><a href="#location">Location &amp; Access</a></li>
-        <li><a href="#contact">Book Now</a></li>
+        <li><a href="#booking">Book Now</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -529,13 +529,16 @@
   4. Copy your Public Key from Account > API Keys
   5. Replace the 4 placeholder values below
 ══════════════════════════════════════════════════════════════════ -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
   const EMAILJS_PUBLIC_KEY   = 'YOUR_PUBLIC_KEY';          // ← paste here
   const EMAILJS_SERVICE_ID   = 'YOUR_SERVICE_ID';          // ← paste here
   const EMAILJS_RESORT_TPL   = 'YOUR_RESORT_TEMPLATE_ID';  // ← paste here
   const EMAILJS_GUEST_TPL    = 'YOUR_GUEST_TEMPLATE_ID';   // ← paste here
 
-  emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+  if (window.emailjs && !EMAILJS_PUBLIC_KEY.startsWith('YOUR_')) {
+    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+  }
 
   // Set minimum dates
   const today = new Date().toISOString().split('T')[0];
@@ -576,6 +579,12 @@
     if (checkOut <= checkIn) {
       errorEl.innerHTML = '⚠️ &nbsp;<strong>Check-out date must be after check-in date.</strong>';
       errorEl.style.display = 'block';
+      return;
+    }
+
+    if (!window.emailjs || [EMAILJS_PUBLIC_KEY, EMAILJS_SERVICE_ID, EMAILJS_RESORT_TPL, EMAILJS_GUEST_TPL].some(value => value.startsWith('YOUR_'))) {
+      errorEl.style.display = 'block';
+      errorEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       return;
     }
 
